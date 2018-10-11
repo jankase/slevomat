@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		5E74AA272354BC6961B0645C /* Pods_SlevomatCS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3DA6C091619985998B3A43 /* Pods_SlevomatCS.framework */; };
+		931AD152AA0F5D77700406EA /* FeedJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931ADC49EB55510AE27B511B /* FeedJson.swift */; };
 		931AD54E7ED3A5A8461CD810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931AD16D7991F72BA54E70C1 /* Assets.xcassets */; };
+		931AD6B2BAC1C967605035CC /* String+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD7CFBE4F96AD734A534C /* String+Log.swift */; };
+		931AD9CADABB0DD934F46284 /* LoaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD02D5A399FC2412CE32B /* LoaderInteractor.swift */; };
+		931ADA77F902AAECD740C3A3 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD4ACAA1819CF6371612D /* Article.swift */; };
 		931ADED7EE37231554676EAF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD02BC299A9EFE73E24D4 /* AppDelegate.swift */; };
+		931ADF341678AE424C43F721 /* LocalDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD8D8674EDE9868E8BD63 /* LocalDb.swift */; };
 		931ADFDD24FDFAAD9F190791 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 931AD4D33563A966FD9F1822 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -18,10 +23,15 @@
 		41A54A344A27F1AA1AF2939B /* Pods-SlevomatCS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlevomatCS.release.xcconfig"; path = "Target Support Files/Pods-SlevomatCS/Pods-SlevomatCS.release.xcconfig"; sourceTree = "<group>"; };
 		5A9F9C9A41567B2060AA8B45 /* Pods-SlevomatCS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SlevomatCS.debug.xcconfig"; path = "Target Support Files/Pods-SlevomatCS/Pods-SlevomatCS.debug.xcconfig"; sourceTree = "<group>"; };
 		931AD02BC299A9EFE73E24D4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		931AD02D5A399FC2412CE32B /* LoaderInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderInteractor.swift; sourceTree = "<group>"; };
 		931AD16D7991F72BA54E70C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		931AD288C4419BE2F43393E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		931AD4ACAA1819CF6371612D /* Article.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		931AD7CFBE4F96AD734A534C /* String+Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Log.swift"; sourceTree = "<group>"; };
+		931AD8D8674EDE9868E8BD63 /* LocalDb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDb.swift; sourceTree = "<group>"; };
 		931ADAC3B7A49CE384D988F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		931ADAF509B8B14062F0C446 /* SlevomatCS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlevomatCS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		931ADC49EB55510AE27B511B /* FeedJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedJson.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +56,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		931AD09A96205D06614F6DC8 /* Loader */ = {
+			isa = PBXGroup;
+			children = (
+				931AD02D5A399FC2412CE32B /* LoaderInteractor.swift */,
+			);
+			path = Loader;
+			sourceTree = "<group>";
+		};
 		931AD0A7DA1F743C5E389953 /* SlevomatCS */ = {
 			isa = PBXGroup;
 			children = (
@@ -53,8 +71,20 @@
 				931AD16D7991F72BA54E70C1 /* Assets.xcassets */,
 				931AD4D33563A966FD9F1822 /* LaunchScreen.storyboard */,
 				931AD02BC299A9EFE73E24D4 /* AppDelegate.swift */,
+				931AD5BEC10902A450EAB7D1 /* Model */,
+				931AD8A88E1EC1A8A7AA95C0 /* Helpers */,
+				931AD09A96205D06614F6DC8 /* Loader */,
 			);
 			path = SlevomatCS;
+			sourceTree = "<group>";
+		};
+		931AD5BEC10902A450EAB7D1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				931AD4ACAA1819CF6371612D /* Article.swift */,
+				931AD8D8674EDE9868E8BD63 /* LocalDb.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		931AD765BB02064368F830B2 = {
@@ -65,6 +95,15 @@
 				44B2E4F25CD8525067D64B47 /* Pods */,
 				ED52D97972BF54F124450EA0 /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		931AD8A88E1EC1A8A7AA95C0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				931AD7CFBE4F96AD734A534C /* String+Log.swift */,
+				931ADC49EB55510AE27B511B /* FeedJson.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		931ADA3CE5B1C4FEA7F9D0D5 /* Products */ = {
@@ -206,6 +245,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				931ADED7EE37231554676EAF /* AppDelegate.swift in Sources */,
+				931ADA77F902AAECD740C3A3 /* Article.swift in Sources */,
+				931ADF341678AE424C43F721 /* LocalDb.swift in Sources */,
+				931AD6B2BAC1C967605035CC /* String+Log.swift in Sources */,
+				931AD9CADABB0DD934F46284 /* LoaderInteractor.swift in Sources */,
+				931AD152AA0F5D77700406EA /* FeedJson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
