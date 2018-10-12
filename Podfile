@@ -10,6 +10,7 @@ target 'SlevomatCS' do
   pod 'Alamofire'
   pod 'RealmSwift'
   pod 'SnapKit'
+  pod 'Reveal-SDK', :configurations => ['Debug']
 
   # Pods for SlevomatCS
 

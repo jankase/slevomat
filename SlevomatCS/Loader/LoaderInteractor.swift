@@ -10,14 +10,14 @@ class LoaderInteractor {
 
   static var shared = LoaderInteractor()
 
-  var endPoint = "https://newsapi.org/v1/articles?source=techcrunch&sortBy=latest&apiKey=463418465f874cb4a5009c4967ae9cf2"
+  var endPoint = "https://newsapi.org/v1/articles?source=techcrunch&sortBy=latest&apiKey=046fd2abc92149f69e8553cf34daad8b"
   //swiftlint:disable:previous line_length
   var queue = DispatchQueue(label: "NetworkLoader", qos: .default)
 
   func startLoading(interval anInterval: DispatchTimeInterval = .seconds(600)) {
     _timer?.cancel()
     _timer = DispatchSource.makeTimerSource(queue: queue)
-    _timer?.schedule(deadline: .now() + 15, repeating: anInterval)
+    _timer?.schedule(deadline: .now(), repeating: anInterval)
     _timer?.setEventHandler { [weak self] in
       self?._loadServerData()
     }

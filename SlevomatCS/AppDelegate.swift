@@ -13,11 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
   var loader: LoaderInteractor = .shared
+  var mainRouter: MainScreenRouter = .shared
 
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
-    loader.startLoading(interval: .seconds(10))
+    loader.startLoading()
+    window = UIWindow(frame: UIScreen.main.bounds)
+    window?.rootViewController = mainRouter.defaultVc()
+    window?.makeKeyAndVisible()
     return true
   }
 

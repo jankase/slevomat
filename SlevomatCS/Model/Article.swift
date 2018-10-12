@@ -23,18 +23,19 @@ class Article: Object, Decodable {
     return URL(string: internalUrl)
   }
 
-  var imageUrl: URL? {
-    guard let theInternalImageUrl = internalImageUrl else {
+  var imageUrl: UIImage? {
+    guard let theImageData = imageData else {
       return nil
     }
-    return URL(string: theInternalImageUrl)
+    return UIImage(data: theImageData)
   }
 
   @objc dynamic var author: String = ""
   @objc dynamic var title: String = ""
   @objc dynamic var desc: String?
   @objc dynamic var internalUrl: String = ""
-  @objc dynamic var internalImageUrl: String?
+  @objc dynamic var imageData: Data?
+//  @objc dynamic var internalImageUrl: String?
   @objc dynamic var publishDate: Date!
 
   required init() {
@@ -56,7 +57,11 @@ class Article: Object, Decodable {
     title = try theContainer.decode(String.self, forKey: .title)
     desc = try theContainer.decodeIfPresent(String.self, forKey: .description)
     internalUrl = try theContainer.decode(String.self, forKey: .url)
-    internalImageUrl = try theContainer.decodeIfPresent(String.self, forKey: .urlToImage)
+    //TODO image data download async
+    if let theImageUrlString = try theContainer.decodeIfPresent(String.self, forKey: .urlToImage),
+       let theImageUrl = URL(string: theImageUrlString) {
+      imageData = try? Data(contentsOf: theImageUrl)
+    }
     let thePublishDateString = try theContainer.decode(String.self, forKey: .publishedAt)
     if let thePublishDate = Article.jsonDateFormatter.date(from: thePublishDateString) {
       publishDate = thePublishDate

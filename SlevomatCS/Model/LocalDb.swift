@@ -9,8 +9,10 @@ import RealmSwift
 struct LocalDb {
 
   static var configuration: Realm.Configuration = {
-    let theResult = Realm.Configuration(schemaVersion: 2,
-                                        migrationBlock: { _, _ in },
+    let theResult = Realm.Configuration(schemaVersion: 3,
+                                        migrationBlock: { aMigration, anOldSchemaVersion in
+                                          if anOldSchemaVersion < 3 { migrateToSchema3(aMigration) }
+                                        },
                                         shouldCompactOnLaunch: { aTotalSize, aUsedSize in
                                           guard (aTotalSize - aUsedSize) > 1_048_576 else {
                                             return false

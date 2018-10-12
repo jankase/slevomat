@@ -5,11 +5,13 @@ PODS:
   - Realm/Headers (3.11.0)
   - RealmSwift (3.11.0):
     - Realm (= 3.11.0)
+  - Reveal-SDK (18)
   - SnapKit (4.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - RealmSwift
+  - Reveal-SDK
   - SnapKit
 
 SPEC REPOS:
@@ -17,14 +19,16 @@ SPEC REPOS:
     - Alamofire
     - Realm
     - RealmSwift
+    - Reveal-SDK
     - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
+  Reveal-SDK: cce79388da3fd0bbb6ae19d769b906cfc3a33a89
   SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
 
-PODFILE CHECKSUM: ee891518deeffb94d6d9941d2453f2e15f6ca1be
+PODFILE CHECKSUM: b05bdf04739a65310d5ed4d3077d7ce5582cc1ea
 
 COCOAPODS: 1.6.0.beta.1
