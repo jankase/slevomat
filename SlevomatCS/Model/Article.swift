@@ -57,10 +57,8 @@ class Article: Object, Decodable {
     title = try theContainer.decode(String.self, forKey: .title)
     desc = try theContainer.decodeIfPresent(String.self, forKey: .description)
     internalUrl = try theContainer.decode(String.self, forKey: .url)
-    //TODO image data download async
-    if let theImageUrlString = try theContainer.decodeIfPresent(String.self, forKey: .urlToImage),
-       let theImageUrl = URL(string: theImageUrlString) {
-      imageData = try? Data(contentsOf: theImageUrl)
+    if let theImageUrlString = try theContainer.decodeIfPresent(String.self, forKey: .urlToImage) {
+      LoaderInteractor.shared.loadImage(imageUrl: theImageUrlString, relatedTo: internalUrl)
     }
     let thePublishDateString = try theContainer.decode(String.self, forKey: .publishedAt)
     if let thePublishDate = Article.jsonDateFormatter.date(from: thePublishDateString) {

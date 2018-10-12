@@ -29,6 +29,23 @@ class LoaderInteractor {
     _timer = nil
   }
 
+  func loadImage(imageUrl anImageUrl: String, relatedTo anArticleUrl: String) {
+    request(anImageUrl).responseData(queue: queue) { aResponse in
+      guard let theImageData = aResponse.result.value else {
+        return
+      }
+      do {
+        let theLocalDb = try LocalDb.realm()
+        try theLocalDb.write {
+          let theArticle = theLocalDb.object(ofType: Article.self, forPrimaryKey: anArticleUrl)
+          theArticle?.imageData = theImageData
+        }
+      } catch let theError {
+        "Failed to store image to local store: \(theError)".log()
+      }
+    }
+  }
+
   private var _timer: DispatchSourceTimer?
 
   private func _loadServerData() {
