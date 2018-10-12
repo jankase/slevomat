@@ -88,7 +88,7 @@ class MainScreenPresenter {
     if currentArticle == nil {
       currentArticle = anArticles.first
     } else if anArticles.isEmpty {
-      currentArticle == nil
+      currentArticle = nil
     }
     _updateNotificationToken = _articles?.observe { [weak self] aChange in
       guard let theSelf = self else {
@@ -97,15 +97,32 @@ class MainScreenPresenter {
       switch aChange {
       case .initial:
         theSelf.view.shouldReloadArticles()
-      case let .update(_, theDeleted, theInserted, theUpdated):
+      case let .update(theArticles, theDeleted, theInserted, theUpdated):
         let theIndexPathMap: (Int) -> IndexPath = { IndexPath(row: $0, section: 0) }
         theSelf.view.performUpdates(deletions: theDeleted.map(theIndexPathMap),
                                     insertion: theInserted.map(theIndexPathMap),
                                     updates: theUpdated.map(theIndexPathMap))
+        if theSelf.currentArticle == nil ||
+               !theArticles.contains(where: { $0.internalUrl == theSelf.currentArticle!.internalUrl }) {
+          theSelf.currentArticle = theArticles.first
+        } else if let theCurrentArticleIndex =
+        theArticles.firstIndex(where: { $0.internalUrl == theSelf.currentArticle!.internalUrl }),
+                  theUpdated.contains(theCurrentArticleIndex) {
+          theSelf.currentArticle = theArticles[theCurrentArticleIndex]
+        }
       case .error(let theError):
         "Realm notification failed: \(theError)".log()
       }
     }
+  }
+
+  func newArticleSelected(indexPath anIndexPath: IndexPath) {
+    let theIndex = anIndexPath.row
+    guard let theArticles = _articles, theIndex < theArticles.count else {
+      currentArticle = nil
+      return
+    }
+    currentArticle = theArticles[theIndex]
   }
 
   private func _article(for anIndexPath: IndexPath) -> Article {
