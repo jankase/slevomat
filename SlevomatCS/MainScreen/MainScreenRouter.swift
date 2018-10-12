@@ -5,7 +5,7 @@
 
 import UIKit
 
-class MainScreenRouter {
+class MainScreenRouter: NSObject {
 
   static var shared = MainScreenRouter()
 
@@ -30,7 +30,27 @@ class MainScreenRouter {
     theNavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
     theNavigationController.navigationBar.shadowImage = UIImage()
     theNavigationController.navigationBar.isTranslucent = true
+    theNavigationController.navigationBar.barStyle = .black
+    theNavigationController.delegate = self
     return theNavigationController
+  }
+
+}
+
+extension MainScreenRouter: UINavigationControllerDelegate {
+
+  public func navigationController(_ aNavigationController: UINavigationController,
+                                   willShow aViewController: UIViewController,
+                                   animated anAnimated: Bool) {
+    let theStatusBarBackground = UIView()
+    theStatusBarBackground.backgroundColor = .black
+    aViewController.view.addSubview(theStatusBarBackground)
+    theStatusBarBackground.snp.makeConstraints {
+      $0.left.equalToSuperview()
+      $0.top.equalToSuperview()
+      $0.right.equalToSuperview()
+      $0.height.equalTo(UIApplication.shared.statusBarFrame.height)
+    }
   }
 
 }

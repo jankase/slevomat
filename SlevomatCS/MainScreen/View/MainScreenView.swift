@@ -39,6 +39,8 @@ class MainScreenView: UIViewController {
       $0.right.equalToSuperview()
     }
     headerContainer = theContainer
+    theContainer.isUserInteractionEnabled = true
+    theContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showWeb)))
     _loadCurrentPreview()
     _loadCurrentTitle()
     _loadCurrentAuthorAndDate()
@@ -119,6 +121,11 @@ class MainScreenView: UIViewController {
   @objc
   func shareCurrentArticle() {
     presenter.requestDataForSharing()
+  }
+
+  @objc
+  func showWeb() {
+    presenter.showWeb()
   }
 
 }

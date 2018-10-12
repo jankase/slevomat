@@ -12,10 +12,12 @@
 		931AD35D59CA33562FCD0530 /* MainScreenInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD59A2D33CB213515D152 /* MainScreenInteractor.swift */; };
 		931AD373A3C059C271578B24 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD9B5741DD6E59D2F4CF4 /* MainScreenView.swift */; };
 		931AD3FBC3556700EFE22229 /* LocalDb+Migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD432F47D0F698EC93FE7 /* LocalDb+Migrations.swift */; };
+		931AD41B00B106309D67B286 /* WebViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931ADD95CDB9A7CD23E5A41A /* WebViewerView.swift */; };
 		931AD54E7ED3A5A8461CD810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 931AD16D7991F72BA54E70C1 /* Assets.xcassets */; };
 		931AD675C6A359E4FDCAA891 /* MainScreenView+TableSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD962EDF71674CDFDC59C /* MainScreenView+TableSource.swift */; };
 		931AD6B2BAC1C967605035CC /* String+Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD7CFBE4F96AD734A534C /* String+Log.swift */; };
 		931AD77EF47429D06A5FE5A2 /* MainScreenView+Notifiy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD7B5D0678E1AE74CCE9B /* MainScreenView+Notifiy.swift */; };
+		931AD7A042202404CEDE8287 /* WebViewerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD8EB8151214F5A09E913 /* WebViewerRouter.swift */; };
 		931AD85FBE0DD95B548F0C23 /* MainScreenView+TableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD0A6FC75DF3036F322DD /* MainScreenView+TableDelegate.swift */; };
 		931AD8EE65CE4AED07A8EF94 /* UIScreen+Rounding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931ADF118EC0B283BF8C290D /* UIScreen+Rounding.swift */; };
 		931AD9CADABB0DD934F46284 /* LoaderInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931AD02D5A399FC2412CE32B /* LoaderInteractor.swift */; };
@@ -46,11 +48,13 @@
 		931AD7C2E7BEB1461BFB0EA3 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		931AD7CFBE4F96AD734A534C /* String+Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Log.swift"; sourceTree = "<group>"; };
 		931AD8D8674EDE9868E8BD63 /* LocalDb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDb.swift; sourceTree = "<group>"; };
+		931AD8EB8151214F5A09E913 /* WebViewerRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewerRouter.swift; sourceTree = "<group>"; };
 		931AD962EDF71674CDFDC59C /* MainScreenView+TableSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MainScreenView+TableSource.swift"; sourceTree = "<group>"; };
 		931AD9B5741DD6E59D2F4CF4 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		931ADAC3B7A49CE384D988F0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		931ADAF509B8B14062F0C446 /* SlevomatCS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SlevomatCS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		931ADC49EB55510AE27B511B /* FeedJson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedJson.swift; sourceTree = "<group>"; };
+		931ADD95CDB9A7CD23E5A41A /* WebViewerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewerView.swift; sourceTree = "<group>"; };
 		931ADF118EC0B283BF8C290D /* UIScreen+Rounding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScreen+Rounding.swift"; sourceTree = "<group>"; };
 		931ADF4ABC527D518A245742 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
 		931ADF82966A6A35B141F40C /* RoundingHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundingHelper.swift; sourceTree = "<group>"; };
@@ -74,7 +78,6 @@
 				5A9F9C9A41567B2060AA8B45 /* Pods-SlevomatCS.debug.xcconfig */,
 				41A54A344A27F1AA1AF2939B /* Pods-SlevomatCS.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -97,8 +100,26 @@
 				931AD8A88E1EC1A8A7AA95C0 /* Helpers */,
 				931AD09A96205D06614F6DC8 /* Loader */,
 				931AD672D8484D076518034E /* MainScreen */,
+				931AD33E6625508B8009277B /* WebViewer */,
 			);
 			path = SlevomatCS;
+			sourceTree = "<group>";
+		};
+		931AD334089BBAC26A3BD94A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				931ADD95CDB9A7CD23E5A41A /* WebViewerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		931AD33E6625508B8009277B /* WebViewer */ = {
+			isa = PBXGroup;
+			children = (
+				931AD8EB8151214F5A09E913 /* WebViewerRouter.swift */,
+				931AD334089BBAC26A3BD94A /* View */,
+			);
+			path = WebViewer;
 			sourceTree = "<group>";
 		};
 		931AD5BEC10902A450EAB7D1 /* Model */ = {
@@ -328,6 +349,8 @@
 				931ADD9501BBFF2F77F69ABC /* RoundingHelper.swift in Sources */,
 				931AD8EE65CE4AED07A8EF94 /* UIScreen+Rounding.swift in Sources */,
 				931AD77EF47429D06A5FE5A2 /* MainScreenView+Notifiy.swift in Sources */,
+				931AD7A042202404CEDE8287 /* WebViewerRouter.swift in Sources */,
+				931AD41B00B106309D67B286 /* WebViewerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

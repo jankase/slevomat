@@ -132,6 +132,13 @@ class MainScreenPresenter {
     view.showShareDialog(data: [theUrl])
   }
 
+  func showWeb() {
+    guard let theUrl = currentArticle?.url else {
+      return
+    }
+    view.navigationController?.pushViewController(WebViewerRouter.shared.defaultVc(url: theUrl), animated: true)
+  }
+
   private func _article(for anIndexPath: IndexPath) -> Article {
     guard let theArticles = _articles, anIndexPath.row < theArticles.count else {
       fatalError("Data not available for index")
