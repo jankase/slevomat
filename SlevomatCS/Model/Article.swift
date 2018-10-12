@@ -23,7 +23,7 @@ class Article: Object, Decodable {
     return URL(string: internalUrl)
   }
 
-  var imageUrl: UIImage? {
+  var image: UIImage? {
     guard let theImageData = imageData else {
       return nil
     }
