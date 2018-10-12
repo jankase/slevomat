@@ -125,6 +125,13 @@ class MainScreenPresenter {
     currentArticle = theArticles[theIndex]
   }
 
+  func requestDataForSharing() {
+    guard let theUrl = currentArticle?.url else {
+      return
+    }
+    view.showShareDialog(data: [theUrl])
+  }
+
   private func _article(for anIndexPath: IndexPath) -> Article {
     guard let theArticles = _articles, anIndexPath.row < theArticles.count else {
       fatalError("Data not available for index")

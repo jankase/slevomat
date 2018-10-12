@@ -62,4 +62,9 @@ extension MainScreenView {
     navigationItem.rightBarButtonItem = nil
   }
 
+  func showShareDialog(data aDataToShare: [Any]) {
+    let theActivityController = UIActivityViewController(activityItems: aDataToShare, applicationActivities: nil)
+    self.present(theActivityController, animated: true)
+  }
+
 }

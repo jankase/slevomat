@@ -118,6 +118,7 @@ class MainScreenView: UIViewController {
 
   @objc
   func shareCurrentArticle() {
+    presenter.requestDataForSharing()
   }
 
 }
