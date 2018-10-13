@@ -38,6 +38,15 @@ class MainScreenView: UIViewController {
       $0.left.equalToSuperview()
       $0.right.equalToSuperview()
     }
+    let theBottomLine = UIView()
+    theBottomLine.backgroundColor = .black
+    theContainer.addSubview(theBottomLine)
+    theBottomLine.snp.makeConstraints {
+      $0.left.equalToSuperview()
+      $0.right.equalToSuperview()
+      $0.bottom.equalToSuperview()
+      $0.height.equalTo(1)
+    }
     headerContainer = theContainer
     theContainer.isUserInteractionEnabled = true
     theContainer.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showWeb)))
@@ -106,6 +115,7 @@ class MainScreenView: UIViewController {
 
   private func _loadTable() {
     let theResult = UITableView()
+    theResult.separatorStyle = .none
     view.addSubview(theResult)
     theResult.snp.makeConstraints {
       $0.top.equalTo(headerContainer.snp.bottom)
