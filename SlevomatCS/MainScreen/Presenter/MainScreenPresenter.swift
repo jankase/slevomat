@@ -13,29 +13,21 @@ class MainScreenPresenter {
   var interactor: MainScreenInteractor!
   var currentArticle: Article? {
     didSet {
-      view.updateCurrentDescription(currentArticle?.desc)
-      let theScreen = UIScreen.main
-      let theImage = currentArticle?.image?
-          .square(maxDimension: theScreen.defaultRounding.round(value: theScreen.bounds.width / 3.0))
-      view.updateCurrentImage(theImage)
-      var authorAndDateSegments: [String] = []
-      if let theAuthor = currentArticle?.author {
-        authorAndDateSegments.append(theAuthor)
+      _detailUpdateNotificationToken?.invalidate()
+      _detailUpdateNotificationToken = currentArticle?.observe { [weak self] aChangeInfo in
+        guard let theSelf = self else {
+          return
+        }
+        switch aChangeInfo {
+        case .change:
+          theSelf.updateCurrentArticleInView()
+        case .error(let theError):
+          "Failed to notify about update article detail: \(theError)".log()
+        case .deleted:
+          theSelf.currentArticle = theSelf._articles?.first
+        }
       }
-      if let thePublishDate = currentArticle?.publishDate {
-        authorAndDateSegments.append(detailDateFormatter.string(from: thePublishDate))
-      }
-      if authorAndDateSegments.isEmpty {
-        view.updateCurrentAuthorNameAndPublishDate(nil)
-      } else {
-        view.updateCurrentAuthorNameAndPublishDate(authorAndDateSegments.joined(separator: ", "))
-      }
-      view.updateCurrentTitle(currentArticle?.title)
-      if currentArticle == nil {
-        view.hideShareButton()
-      } else {
-        view.showShareButton()
-      }
+      updateCurrentArticleInView()
     }
   }
 
@@ -61,6 +53,11 @@ class MainScreenPresenter {
     theDateFormatter.locale = theFormatterLocale
     return theDateFormatter
   }()
+
+  deinit {
+    _listUpdateNotificationToken?.invalidate()
+    _detailUpdateNotificationToken?.invalidate()
+  }
 
   func loadArticles() {
     interactor.loadArticles()
@@ -90,25 +87,21 @@ class MainScreenPresenter {
     } else if anArticles.isEmpty {
       currentArticle = nil
     }
-    _updateNotificationToken = _articles?.observe { [weak self] aChange in
+    _listUpdateNotificationToken?.invalidate()
+    _listUpdateNotificationToken = _articles?.observe { [weak self] aChange in
       guard let theSelf = self else {
         return
       }
       switch aChange {
       case .initial:
         theSelf.view.shouldReloadArticles()
-      case let .update(theArticles, theDeleted, theInserted, theUpdated):
+      case let .update(_, theDeleted, theInserted, theUpdated):
         let theIndexPathMap: (Int) -> IndexPath = { IndexPath(row: $0, section: 0) }
         theSelf.view.performUpdates(deletions: theDeleted.map(theIndexPathMap),
                                     insertion: theInserted.map(theIndexPathMap),
                                     updates: theUpdated.map(theIndexPathMap))
-        if theSelf.currentArticle == nil ||
-               !theArticles.contains(where: { $0.internalUrl == theSelf.currentArticle!.internalUrl }) {
-          theSelf.currentArticle = theArticles.first
-        } else if let theCurrentArticleIndex =
-        theArticles.firstIndex(where: { $0.internalUrl == theSelf.currentArticle!.internalUrl }),
-                  theUpdated.contains(theCurrentArticleIndex) {
-          theSelf.currentArticle = theArticles[theCurrentArticleIndex]
+        if theSelf.currentArticle == nil {
+          theSelf.currentArticle = theSelf._articles?.first
         }
       case .error(let theError):
         "Realm notification failed: \(theError)".log()
@@ -139,6 +132,32 @@ class MainScreenPresenter {
     view.navigationController?.pushViewController(WebViewerRouter.shared.defaultVc(url: theUrl), animated: true)
   }
 
+  func updateCurrentArticleInView() {
+    view.updateCurrentDescription(currentArticle?.desc)
+    let theScreen = UIScreen.main
+    let theImage = currentArticle?.image?
+        .square(maxDimension: theScreen.defaultRounding.round(value: theScreen.bounds.width / 3.0))
+    view.updateCurrentImage(theImage)
+    var authorAndDateSegments: [String] = []
+    if let theAuthor = currentArticle?.author {
+      authorAndDateSegments.append(theAuthor)
+    }
+    if let thePublishDate = currentArticle?.publishDate {
+      authorAndDateSegments.append(detailDateFormatter.string(from: thePublishDate))
+    }
+    if authorAndDateSegments.isEmpty {
+      view.updateCurrentAuthorNameAndPublishDate(nil)
+    } else {
+      view.updateCurrentAuthorNameAndPublishDate(authorAndDateSegments.joined(separator: ", "))
+    }
+    view.updateCurrentTitle(currentArticle?.title)
+    if currentArticle == nil {
+      view.hideShareButton()
+    } else {
+      view.showShareButton()
+    }
+  }
+
   private func _article(for anIndexPath: IndexPath) -> Article {
     guard let theArticles = _articles, anIndexPath.row < theArticles.count else {
       fatalError("Data not available for index")
@@ -147,6 +166,7 @@ class MainScreenPresenter {
   }
 
   private var _articles: Results<Article>?
-  private var _updateNotificationToken: NotificationToken?
+  private var _listUpdateNotificationToken: NotificationToken?
+  private var _detailUpdateNotificationToken: NotificationToken?
 
 }

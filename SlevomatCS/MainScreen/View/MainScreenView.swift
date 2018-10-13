@@ -37,6 +37,7 @@ class MainScreenView: UIViewController {
       $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
       $0.left.equalToSuperview()
       $0.right.equalToSuperview()
+      $0.height.equalTo(theContainer.snp.width).dividedBy(2)
     }
     let theBottomLine = UIView()
     theBottomLine.backgroundColor = .black
@@ -64,8 +65,7 @@ class MainScreenView: UIViewController {
       $0.top.equalToSuperview().inset(MainScreenView.border)
       $0.left.equalToSuperview().inset(MainScreenView.border)
       $0.width.equalToSuperview().dividedBy(3)
-      $0.height.equalTo(thePreview.snp.width)
-      $0.bottom.equalToSuperview().inset(MainScreenView.border).priority(.low)
+      $0.bottom.lessThanOrEqualToSuperview().inset(MainScreenView.border)
     }
     currentPreview = thePreview
   }
@@ -101,14 +101,14 @@ class MainScreenView: UIViewController {
   private func _loadCurrentDescription() {
     let theDescription = UILabel()
     theDescription.font = .preferredFont(forTextStyle: .caption1)
-    theDescription.numberOfLines = 5
+    theDescription.numberOfLines = 0
     theDescription.lineBreakMode = .byTruncatingTail
     headerContainer.addSubview(theDescription)
     theDescription.snp.makeConstraints {
       $0.left.equalTo(currentPreview.snp.right).offset(MainScreenView.border)
       $0.right.equalToSuperview().inset(MainScreenView.border)
       $0.top.equalTo(currentAuthorAndDate.snp.bottom).offset(MainScreenView.labelSpacing)
-      $0.bottom.equalToSuperview().inset(MainScreenView.border).priority(.low)
+      $0.bottom.lessThanOrEqualToSuperview().inset(MainScreenView.border)
     }
     currentDescription = theDescription
   }
